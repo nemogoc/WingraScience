@@ -4,11 +4,11 @@ from social_water import *
 import os
 import base64
 
-usr = '<MYACCOUNT>@gmail.com'
+usr = 'REMOVED'
 
 
 # the password is here encoded so that it can't be read by looking at this code. Not secure, but obfuscated
-pwd_encoded = '<ENCODED_PWD'
+pwd_encoded = 'REMOVED'
 #email_scope dictates whether read all or just update using the following options:
 #'ALL' means every message, 
 #'UNSEEN' means just new unread ones

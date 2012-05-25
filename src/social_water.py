@@ -39,9 +39,9 @@ class timezone_conversion_data:
 class email_reader:
     # initialize the class
     def __init__ (self,user,pwd_encoded,email_scope):
-        self.name = 'crowdhydrology'
+        self.name = 'wingrascience'
         self.user = user
-        self.pwd = base64.b64decode(pwd_encoded) #TODO: Fix this
+        self.pwd = base64.b64decode(pwd_encoded)
         self.email_scope = email_scope
         self.data = dict()
         self.dfmt = '%a, %d %b %Y %H:%M:%S '
