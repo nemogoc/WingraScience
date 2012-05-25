@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 from social_water import *
 import os
 import base64

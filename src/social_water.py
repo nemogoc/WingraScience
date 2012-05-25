@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 import numpy as np
 import email, imaplib
 from datetime import datetime, timedelta
@@ -39,7 +41,7 @@ class email_reader:
     def __init__ (self,user,pwd_encoded,email_scope):
         self.name = 'crowdhydrology'
         self.user = user
-        self.pwd = base64.b64decode(pwd_encoded) //TODO: Fix this
+        self.pwd = base64.b64decode(pwd_encoded) #TODO: Fix this
         self.email_scope = email_scope
         self.data = dict()
         self.dfmt = '%a, %d %b %Y %H:%M:%S '
@@ -132,8 +134,8 @@ class email_reader:
                 currmess.is_gage_msg = True
                 # we will test the line, but we need to remove some terms using regex substitutions
                 line = re.sub('(wb)','',line)
-                //line = re.sub('(by)','',line)
-                //line = re.sub('(my)','',line)
+                #line = re.sub('(by)','',line)
+                #line = re.sub('(my)','',line)
                 line = re.sub('(station)','',line)
                 line = re.sub('(water)','',line)
                 line = re.sub('(level)','',line)
