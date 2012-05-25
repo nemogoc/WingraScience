@@ -25,8 +25,8 @@ class gage_results:
 class timezone_conversion_data:
     def __init__(self):
         # set the timezone-specific values -- currently applies to all measurements
-        self.std_time_utc_offset = timedelta(hours = 5)
-        self.dst_time_utc_offset = timedelta(hours = 4)
+        self.std_time_utc_offset = timedelta(hours = 6)
+        self.dst_time_utc_offset = timedelta(hours = 5)
         self.dst_start_month = 3
         self.dst_start_day = 11
         self.dst_start_hour = 2
@@ -39,14 +39,13 @@ class email_reader:
     def __init__ (self,user,pwd_encoded,email_scope):
         self.name = 'crowdhydrology'
         self.user = user
-        self.pwd = base64.b64decode(pwd_encoded)
+        self.pwd = base64.b64decode(pwd_encoded) //TODO: Fix this
         self.email_scope = email_scope
         self.data = dict()
         self.dfmt = '%a, %d %b %Y %H:%M:%S '
         self.outfmt = '%m/%d/%Y %H:%M:%S'
         # make a list of valid station IDs
-        self.stations = ['ny1000','ny1001','ny1002','ny1003',
-                         'ny1004','ny1005','ny1006','ny1007','ny1008']
+        self.stations = ['wb0001','wb0002','wb0003']
         for i in self.stations:
             self.data[i] = gage_results(i)
         self.tzdata = timezone_conversion_data()
@@ -113,7 +112,7 @@ class email_reader:
         # parse through all the messages
         for currmess in self.messages:
             # first the dates
-            tmpdate = currmess.rawdate[:-5]
+            tmpdate = currmess.rawdate[:-6]
             currmess.date = datetime.strptime(tmpdate,self.dfmt)
             currmess.date = tz_adjust_EST_EDT(currmess.date,self.tzdata)
             currmess.dateout = datetime.strftime(currmess.date,self.outfmt)
@@ -132,9 +131,9 @@ class email_reader:
             if (('ny' in line) or ('by' in line) or ('my' in line) or ('station' in line)):
                 currmess.is_gage_msg = True
                 # we will test the line, but we need to remove some terms using regex substitutions
-                line = re.sub('(ny)','',line)
-                line = re.sub('(by)','',line)
-                line = re.sub('(my)','',line)
+                line = re.sub('(wb)','',line)
+                //line = re.sub('(by)','',line)
+                //line = re.sub('(my)','',line)
                 line = re.sub('(station)','',line)
                 line = re.sub('(water)','',line)
                 line = re.sub('(level)','',line)
